@@ -1,7 +1,5 @@
 package main;
 
-import javax.swing.JOptionPane;
-
 import rieger.ui.MessageHandler;
 import ui.LoginGUI;
 import ui.MainGUI;
@@ -13,8 +11,7 @@ import ui.MainGUI;
  *
  */
 public class GrundbuchVerwaltung {
-	
-	static MessageHandler messageHandler;
+
 
 	/**
 	 * Starts the {@link LoginGUI}.
@@ -27,35 +24,6 @@ public class GrundbuchVerwaltung {
 	}
 
 	/**
-	 * Main method which initialize the {@link LoginGUI} and the {@link MainGUI} if the Login is correct.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-		System.out.println("===Start Grundbuchverwaltung");
-		
-		int whichButtonIsPressedInLoginGUI;
-		boolean loginCorrect;
-		
-		//wiederhole Login bis richtig!
-		do{
-		whichButtonIsPressedInLoginGUI = login();
-		
-		//brich ab wenn User das wünscht
-		if(whichButtonIsPressedInLoginGUI==-1||whichButtonIsPressedInLoginGUI==1)
-			break;
-		loginCorrect = !loginCorrect();
-		
-		//prüfe ob zugang genehmigt mit loginCorrect()
-		if(loginCorrect){
-			MessageHandler.showErrorMessage(null, "Login nicht Korrekt");
-		}else{
-			System.out.println("===Starte Main GUI===");
-		}
-		}while(loginCorrect);
-
-	}
-	/**
 	 * Check all Inputs if you can Login.
 	 * @return <code>true</code> if access graduate or <code>false</code> if access denied.
 	 */
@@ -63,6 +31,36 @@ public class GrundbuchVerwaltung {
 		//TODO: Test Login
 		System.out.println("Login muss noch getestet werden");
 		return false;
+	}
+	/**
+	 * Main method which initialize the {@link LoginGUI} and the {@link MainGUI} if the Login is correct.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		System.out.println("===Start Grundbuchverwaltung");
+
+		int whichButtonIsPressedInLoginGUI;
+		boolean loginCorrect;
+
+		//wiederhole Login bis richtig!
+		do{
+			whichButtonIsPressedInLoginGUI = login();
+
+			//brich ab wenn User das wünscht
+			if(whichButtonIsPressedInLoginGUI==-1||whichButtonIsPressedInLoginGUI==1) {
+				break;
+			}
+			loginCorrect = !loginCorrect();
+
+			//prüfe ob zugang genehmigt mit loginCorrect()
+			if(loginCorrect){
+				MessageHandler.showErrorMessage(null, "Login nicht Korrekt");
+			}else{
+				System.out.println("===Starte Main GUI===");
+			}
+		}while(loginCorrect);
+
 	}
 
 }
