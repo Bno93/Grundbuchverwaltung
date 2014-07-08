@@ -32,6 +32,7 @@ public class GrundbuchVerwaltung {
 		System.out.println("Login muss noch getestet werden");
 		return false;
 	}
+
 	/**
 	 * Main method which initialize the {@link LoginGUI} and the {@link MainGUI} if the Login is correct.
 	 * @param args
