@@ -9,8 +9,13 @@ import java.util.List;
  *
  */
 public class Grundbuch {
+	private String grundbuchName;
 	List<Grundbuchblatt> blaetter = new ArrayList<Grundbuchblatt>();
 
+	public Grundbuch(String grundbuchName, List<Grundbuchblatt> blaetter) {
+		this.grundbuchName = grundbuchName;
+		this.blaetter = blaetter;
+	}
 	/**
 	 * Check is Blatt exists in Grundbuch.
 	 * @param blatt Gruchbuchblatt
