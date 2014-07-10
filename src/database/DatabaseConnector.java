@@ -220,6 +220,7 @@ public class DatabaseConnector {
 		//		System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHH");
 		this.userCollection = this.database.getCollection( "User" );
 		this.grundbuchCollection = this.database.getCollection("Grundbuch" );
+		this.grundbuchblattCollection = this.database.getCollection("Grundbuchblatt");
 	}
 
 	/**

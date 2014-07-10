@@ -61,7 +61,6 @@ public class GrundbuchVerwaltung {
 			MessageHandler.showErrorMessage(null, "Connection Lost!" );
 			return false;
 		}
-		System.out.println("Login muss noch getestet werden");
 		return true;
 	}
 
