@@ -1,6 +1,5 @@
 package database;
 
-import grundbuch.Blattnummer;
 import grundbuch.Grundbuch;
 import grundbuch.GrundbuchList;
 import grundbuch.Grundbuchblatt;
@@ -14,6 +13,11 @@ import grundbuch.abteilungII.Lasten;
 import grundbuch.abteilungII.Wiedersprueche;
 import grundbuch.abteilungIII.AbteilungIII;
 import grundbuch.abteilungIII.Grundpfandrecht;
+import grundbuch.aufschrift.Amtsgericht;
+import grundbuch.aufschrift.Aufschrift;
+import grundbuch.aufschrift.Blattnummer;
+import grundbuch.aufschrift.BuchNummer;
+import grundbuch.aufschrift.Gemarkung;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -62,7 +66,8 @@ public class DataBase {
 				blaetterFuerBuch.add(new Grundbuchblatt(new Blattnummer(Integer.parseInt(blattCursor.get("Blattnummer").toString())),
 						new AbteilungI(new Eigentuemer(blattCursor.get("Eigentuemer").toString()), new Eigentumsverhaeltnis(blattCursor.get("Eigentumsverhaeltnis").toString()), new Erwerbsgrundlage( blattCursor.get("Erwerbsgrundlage").toString())),
 						new AbetilungII(new Lasten(blattCursor.get("Lasten").toString()), new Beschraenkungen(blattCursor.get("Beschraenkungen").toString()), new Wiedersprueche(blattCursor.get("Wiedersprueche").toString())),
-						new AbteilungIII(new Grundpfandrecht(blattCursor.get("Grundpfandrecht").toString()))));
+						new AbteilungIII(new Grundpfandrecht(blattCursor.get("Grundpfandrecht").toString())),
+						new Aufschrift(new Amtsgericht(blattCursor.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattCursor.get("Blattnummer").toString())), new Blattnummer(Integer.parseInt(blattCursor.get("Buchnummer").toString())), new Gemarkung(blattCursor.get("Gemarkung").toString()))));
 				System.out.println("Grundpfandrecht:" + blattCursor.get("Grundpfandrecht").toString());
 			}
 
