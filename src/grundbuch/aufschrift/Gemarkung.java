@@ -57,4 +57,12 @@ public class Gemarkung {
 	public void setGemarkung(String gemarkung) {
 		this.gemarkung = gemarkung;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Gemarkung [gemarkung=" + this.gemarkung + "]";
+	}
 }

@@ -63,4 +63,12 @@ public class Eigentuemer {
 				+ ((this.eigentuemer == null) ? 0 : this.eigentuemer.hashCode());
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Eigentuemer [eigentuemer=" + this.eigentuemer + "]";
+	}
 }

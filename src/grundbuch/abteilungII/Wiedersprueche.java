@@ -60,4 +60,12 @@ public class Wiedersprueche {
 				+ ((this.wiederstrueche == null) ? 0 : this.wiederstrueche.hashCode());
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Wiedersprueche [wiederstrueche=" + this.wiederstrueche + "]";
+	}
 }

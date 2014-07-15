@@ -133,5 +133,15 @@ public class Aufschrift {
 		this.gemarkung = gemarkung;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Aufschrift [amtsgericht=" + this.amtsgericht + ", buchNummer="
+				+ this.buchNummer + ", gemarkung=" + this.gemarkung + ", blattnummer="
+				+ this.blattnummer + "]";
+	}
+
 
 }

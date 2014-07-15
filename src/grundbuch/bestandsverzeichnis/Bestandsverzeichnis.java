@@ -132,5 +132,15 @@ public class Bestandsverzeichnis {
 		this.zustehendeRechte = zustehendeRechte;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Bestandsverzeichnis [groesse=" + this.groesse + ", lage=" + this.lage
+				+ ", wirtschaft=" + this.wirtschaft + ", zustehendeRechte="
+				+ this.zustehendeRechte + "]";
+	}
+
 
 }

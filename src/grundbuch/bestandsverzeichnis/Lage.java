@@ -122,4 +122,13 @@ public class Lage {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Lage [ort=" + this.ort + ", plz=" + this.plz + ", hausnummer="
+				+ this.hausnummer + ", strasse=" + this.strasse + "]";
+	}
+
 }

@@ -58,5 +58,13 @@ public class Amtsgericht {
 		this.amtsgericht = amtsgericht;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Amtsgericht [amtsgericht=" + this.amtsgericht + "]";
+	}
+
 
 }

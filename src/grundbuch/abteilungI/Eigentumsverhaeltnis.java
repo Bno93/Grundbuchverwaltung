@@ -65,4 +65,13 @@ public class Eigentumsverhaeltnis {
 						.hashCode());
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Eigentumsverhaeltnis [eigentumverhaeltnis="
+				+ this.eigentumverhaeltnis + "]";
+	}
 }

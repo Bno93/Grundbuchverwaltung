@@ -52,4 +52,12 @@ public class BuchNummer {
 	public void setBuchNummer(int buchNummer) {
 		this.buchNummer = buchNummer;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "BuchNummer [buchNummer=" + this.buchNummer + "]";
+	}
 }

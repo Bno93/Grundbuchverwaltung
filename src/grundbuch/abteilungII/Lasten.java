@@ -62,4 +62,12 @@ public class Lasten {
 		result = prime * result + ((this.lasten == null) ? 0 : this.lasten.hashCode());
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Lasten [lasten=" + this.lasten + "]";
+	}
 }

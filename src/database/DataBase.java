@@ -7,7 +7,7 @@ import grundbuch.abteilungI.AbteilungI;
 import grundbuch.abteilungI.Eigentuemer;
 import grundbuch.abteilungI.Eigentumsverhaeltnis;
 import grundbuch.abteilungI.Erwerbsgrundlage;
-import grundbuch.abteilungII.AbetilungII;
+import grundbuch.abteilungII.AbteilungII;
 import grundbuch.abteilungII.Beschraenkungen;
 import grundbuch.abteilungII.Lasten;
 import grundbuch.abteilungII.Wiedersprueche;
@@ -18,6 +18,11 @@ import grundbuch.aufschrift.Aufschrift;
 import grundbuch.aufschrift.Blattnummer;
 import grundbuch.aufschrift.BuchNummer;
 import grundbuch.aufschrift.Gemarkung;
+import grundbuch.bestandsverzeichnis.Bestandsverzeichnis;
+import grundbuch.bestandsverzeichnis.Groesse;
+import grundbuch.bestandsverzeichnis.Lage;
+import grundbuch.bestandsverzeichnis.Wirtschaft;
+import grundbuch.bestandsverzeichnis.ZustehendeRechte;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -65,9 +70,16 @@ public class DataBase {
 				DBObject blattCursor = buchCursor.next();
 				blaetterFuerBuch.add(new Grundbuchblatt(new Blattnummer(Integer.parseInt(blattCursor.get("Blattnummer").toString())),
 						new AbteilungI(new Eigentuemer(blattCursor.get("Eigentuemer").toString()), new Eigentumsverhaeltnis(blattCursor.get("Eigentumsverhaeltnis").toString()), new Erwerbsgrundlage( blattCursor.get("Erwerbsgrundlage").toString())),
-						new AbetilungII(new Lasten(blattCursor.get("Lasten").toString()), new Beschraenkungen(blattCursor.get("Beschraenkungen").toString()), new Wiedersprueche(blattCursor.get("Wiedersprueche").toString())),
+						new AbteilungII(new Lasten(blattCursor.get("Lasten").toString()), new Beschraenkungen(blattCursor.get("Beschraenkungen").toString()), new Wiedersprueche(blattCursor.get("Wiedersprueche").toString())),
 						new AbteilungIII(new Grundpfandrecht(blattCursor.get("Grundpfandrecht").toString())),
-						new Aufschrift(new Amtsgericht(blattCursor.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattCursor.get("Blattnummer").toString())), new Blattnummer(Integer.parseInt(blattCursor.get("Buchnummer").toString())), new Gemarkung(blattCursor.get("Gemarkung").toString()))));
+						new Aufschrift(new Amtsgericht(blattCursor.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattCursor.get("Buchnummer").toString())), new Blattnummer(Integer.parseInt(blattCursor.get("Buchnummer").toString())), new Gemarkung(blattCursor.get("Gemarkung").toString())),
+						new Bestandsverzeichnis(new Groesse(Float.parseFloat(blattCursor.get("Groesse").toString())), new Lage(blattCursor.get("Ort").toString(), Integer.parseInt(blattCursor.get("PLZ").toString()), blattCursor.get("Hausnummer").toString(), blattCursor.get("Strasse").toString()), new Wirtschaft(blattCursor.get("Wirtschaft").toString()), new ZustehendeRechte(blattCursor.get("Zustehende Rechte").toString()))));
+				System.out.println(new Grundbuchblatt(new Blattnummer(Integer.parseInt(blattCursor.get("Blattnummer").toString())),
+						new AbteilungI(new Eigentuemer(blattCursor.get("Eigentuemer").toString()), new Eigentumsverhaeltnis(blattCursor.get("Eigentumsverhaeltnis").toString()), new Erwerbsgrundlage( blattCursor.get("Erwerbsgrundlage").toString())),
+						new AbteilungII(new Lasten(blattCursor.get("Lasten").toString()), new Beschraenkungen(blattCursor.get("Beschraenkungen").toString()), new Wiedersprueche(blattCursor.get("Wiedersprueche").toString())),
+						new AbteilungIII(new Grundpfandrecht(blattCursor.get("Grundpfandrecht").toString())),
+						new Aufschrift(new Amtsgericht(blattCursor.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattCursor.get("Buchnummer").toString())), new Blattnummer(Integer.parseInt(blattCursor.get("Buchnummer").toString())), new Gemarkung(blattCursor.get("Gemarkung").toString())),
+						new Bestandsverzeichnis(new Groesse(Float.parseFloat(blattCursor.get("Groesse").toString())), new Lage(blattCursor.get("Ort").toString(), Integer.parseInt(blattCursor.get("PLZ").toString()), blattCursor.get("Hausnummer").toString(), blattCursor.get("Strasse").toString()), new Wirtschaft(blattCursor.get("Wirtschaft").toString()), new ZustehendeRechte(blattCursor.get("Zustehende Rechte").toString()))).toString());
 				System.out.println("Grundpfandrecht:" + blattCursor.get("Grundpfandrecht").toString());
 			}
 

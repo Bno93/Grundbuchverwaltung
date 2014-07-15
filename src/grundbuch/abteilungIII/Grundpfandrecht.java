@@ -64,5 +64,13 @@ public class Grundpfandrecht {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Grundpfandrecht [grundpfandrechte=" + this.grundpfandrechte + "]";
+	}
+
 
 }

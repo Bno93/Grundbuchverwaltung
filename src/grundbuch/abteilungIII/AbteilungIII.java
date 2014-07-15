@@ -67,5 +67,13 @@ public class AbteilungIII {
 		this.grundpfandrecht = grundpfandrecht;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AbteilungIII [grundpfandrecht=" + this.grundpfandrecht + "]";
+	}
+
 
 }

@@ -1,11 +1,11 @@
 package grundbuch.abteilungII;
 
-public class AbetilungII {
+public class AbteilungII {
 	private Lasten lasten;
 	private Beschraenkungen beschraenkungen;
 	private Wiedersprueche wiedersprueche;
 
-	public AbetilungII(Lasten lasten, Beschraenkungen beschraenkungen, Wiedersprueche wiedersprueche) {
+	public AbteilungII(Lasten lasten, Beschraenkungen beschraenkungen, Wiedersprueche wiedersprueche) {
 		this.lasten = lasten;
 		this.beschraenkungen = beschraenkungen;
 		this.wiedersprueche = wiedersprueche;
@@ -25,7 +25,7 @@ public class AbetilungII {
 		if (this.getClass() != obj.getClass()) {
 			return false;
 		}
-		AbetilungII other = (AbetilungII) obj;
+		AbteilungII other = (AbteilungII) obj;
 		if (this.beschraenkungen == null) {
 			if (other.beschraenkungen != null) {
 				return false;
@@ -105,6 +105,15 @@ public class AbetilungII {
 	 */
 	public void setWiedersprueche(Wiedersprueche wiedersprueche) {
 		this.wiedersprueche = wiedersprueche;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AbteilungII [lasten=" + this.lasten + ", beschraenkungen="
+				+ this.beschraenkungen + ", wiedersprueche=" + this.wiedersprueche + "]";
 	}
 
 

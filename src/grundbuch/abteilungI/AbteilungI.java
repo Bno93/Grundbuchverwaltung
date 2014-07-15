@@ -128,5 +128,15 @@ public class AbteilungI {
 		this.erwerbsgrundlage = erwerbsgrundlage;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "AbteilungI [eigentuemer=" + this.eigentuemer
+				+ ", eigentumsverhaeltnis=" + this.eigentumsverhaeltnis
+				+ ", erwerbsgrundlage=" + this.erwerbsgrundlage + "]";
+	}
+
 
 }
