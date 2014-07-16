@@ -19,6 +19,11 @@ import database.DatabaseConnector;
  */
 public class GrundbuchVerwaltung {
 
+	private static DatabaseConnector connector;
+
+	public static DataBase database;
+	private static LoginGUI gui = new LoginGUI();
+
 	/**
 	 * Starts the {@link LoginGUI}.
 	 * @return <code>true</code> after a successful login otherwise <code>false</code>.
@@ -27,6 +32,7 @@ public class GrundbuchVerwaltung {
 		System.out.println("===Login GUI START==");
 		return gui.startGui();
 	}
+
 	/**
 	 * Check all Inputs if you can Login.
 	 * @return <code>true</code> if access graduate or <code>false</code> if access denied.
@@ -63,7 +69,6 @@ public class GrundbuchVerwaltung {
 		}
 		return true;
 	}
-
 	/**
 	 * Main method which initialize the {@link LoginGUI} and the {@link MainGUI} if the Login is correct.
 	 * @param args
@@ -72,8 +77,6 @@ public class GrundbuchVerwaltung {
 	 * @throws UnknownHostException
 	 */
 	public static void main(String[] args) throws UnknownHostException, MongoException, Exception {
-
-		System.out.println("===Start Grundbuchverwaltung");
 
 		int whichButtonIsPressedInLoginGUI;
 		boolean loginCorrect;
@@ -98,10 +101,7 @@ public class GrundbuchVerwaltung {
 
 		System.out.println("===Starte Main GUI===");
 	}
-
-	public static DataBase database;
-	private static LoginGUI gui = new LoginGUI();
-	private static DatabaseConnector connector;
+	public MessageHandler messageHandler;
 
 
 
