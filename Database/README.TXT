@@ -1,4 +1,4 @@
-MongoDB Downloaden 
+MongoDB Downloaden Skript benötigt MINDESTENS version 2.6.0
 
 ordner /data/db anlegen fals nicht vorhanden
 § sudo mkdir /data/db
@@ -21,3 +21,6 @@ Programm starten
 
 PS:
 Server muss beim systemstart gestartet werden oder in den Startprogrammen eingetragen werden
+
+UNTER WINDOWS:
+
