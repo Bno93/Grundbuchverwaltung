@@ -1,5 +1,5 @@
 conn = new Mongo();
-db = connect("localhost:27017");
+db = connect("localhost:27017/Grundbuchverwaltung");
 db = db.getSiblingDB("admin");
 db.dropDatabase()
 db = db.getSiblingDB("Grundbuchverwaltung");
@@ -14,5 +14,5 @@ db.createUser(
 			{
 				user:"willi",
 				pwd:"bald",
-				roles:[{role:"readWrite",db:"TestDB"}]});
+				roles:[{role:"readWrite",db:"Grundbuchverwaltung"}]});
 db.getCollectionNames();
