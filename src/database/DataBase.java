@@ -25,15 +25,24 @@ import grundbuch.bestandsverzeichnis.Wirtschaft;
 import grundbuch.bestandsverzeichnis.ZustehendeRechte;
 
 import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import nutzerverwaltung.TempUser;
 import nutzerverwaltung.User;
 
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
-
+/**
+ * Is a visual Database. Which loads all Data from a real DB.
+ *
+ * Momentan nur Grundbücher, Blätter und User!!!!
+ * @author da5254
+ *
+ */
 public class DataBase {
 	private String hostname;
 	private int portnumber;
@@ -43,6 +52,7 @@ public class DataBase {
 	private DatabaseConnector connector;
 
 	GrundbuchList buecher = new GrundbuchList();
+	List<User> userList = new ArrayList<User>();
 
 	public DataBase(String hostname, int portnumber, String databaseName, String username, char[] password) throws UnknownHostException, MongoException, Exception {
 		this.databaseName = databaseName;
@@ -57,8 +67,21 @@ public class DataBase {
 		return this.buecher;
 	}
 
+	/**
+	 * @return the userList
+	 */
+	public List<User> getUserList() {
+		return this.userList;
+	}
+
 	public void loadData(){
-		System.out.println("start loding Data");
+		this.loadGrundbuecher();
+		this.loadUser();
+		this.connector.closeDBConnection();
+	}
+
+	private void loadGrundbuecher(){
+		System.out.println("\n+++start loding Data+++");
 
 		DBCursor buchCursor = this.connector.getGrundbuchCollection().find();
 		while(buchCursor.hasNext()){
@@ -75,26 +98,42 @@ public class DataBase {
 							new Aufschrift(new Amtsgericht(blattObject.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattObject.get("Buchnummer").toString())), new Blattnummer(Integer.parseInt(blattObject.get("Buchnummer").toString())), new Gemarkung(blattObject.get("Gemarkung").toString())),
 							new Bestandsverzeichnis(new Groesse(Float.parseFloat(blattObject.get("Groesse").toString())), new Lage(blattObject.get("Ort").toString(), Integer.parseInt(blattObject.get("PLZ").toString()), blattObject.get("Hausnummer").toString(), blattObject.get("Strasse").toString()), new Wirtschaft(blattObject.get("Wirtschaft").toString()), new ZustehendeRechte(blattObject.get("Zustehende Rechte").toString()))));
 
-					System.out.println(new Grundbuchblatt(new Blattnummer(Integer.parseInt(blattObject.get("Blattnummer").toString())),
-							new AbteilungI(new Eigentuemer(blattObject.get("Eigentuemer").toString()), new Eigentumsverhaeltnis(blattObject.get("Eigentumsverhaeltnis").toString()), new Erwerbsgrundlage( blattObject.get("Erwerbsgrundlage").toString())),
-							new AbteilungII(new Lasten(blattObject.get("Lasten").toString()), new Beschraenkungen(blattObject.get("Beschraenkungen").toString()), new Wiedersprueche(blattObject.get("Wiedersprueche").toString())),
-							new AbteilungIII(new Grundpfandrecht(blattObject.get("Grundpfandrecht").toString())),
-							new Aufschrift(new Amtsgericht(blattObject.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattObject.get("Buchnummer").toString())), new Blattnummer(Integer.parseInt(blattObject.get("Buchnummer").toString())), new Gemarkung(blattObject.get("Gemarkung").toString())),
-							new Bestandsverzeichnis(new Groesse(Float.parseFloat(blattObject.get("Groesse").toString())), new Lage(blattObject.get("Ort").toString(), Integer.parseInt(blattObject.get("PLZ").toString()), blattObject.get("Hausnummer").toString(), blattObject.get("Strasse").toString()), new Wirtschaft(blattObject.get("Wirtschaft").toString()), new ZustehendeRechte(blattObject.get("Zustehende Rechte").toString()))));
+					//					System.out.println(new Grundbuchblatt(new Blattnummer(Integer.parseInt(blattObject.get("Blattnummer").toString())),
+					//							new AbteilungI(new Eigentuemer(blattObject.get("Eigentuemer").toString()), new Eigentumsverhaeltnis(blattObject.get("Eigentumsverhaeltnis").toString()), new Erwerbsgrundlage( blattObject.get("Erwerbsgrundlage").toString())),
+					//							new AbteilungII(new Lasten(blattObject.get("Lasten").toString()), new Beschraenkungen(blattObject.get("Beschraenkungen").toString()), new Wiedersprueche(blattObject.get("Wiedersprueche").toString())),
+					//							new AbteilungIII(new Grundpfandrecht(blattObject.get("Grundpfandrecht").toString())),
+					//							new Aufschrift(new Amtsgericht(blattObject.get("Amtsgericht").toString()), new BuchNummer(Integer.parseInt(blattObject.get("Buchnummer").toString())), new Blattnummer(Integer.parseInt(blattObject.get("Buchnummer").toString())), new Gemarkung(blattObject.get("Gemarkung").toString())),
+					//							new Bestandsverzeichnis(new Groesse(Float.parseFloat(blattObject.get("Groesse").toString())), new Lage(blattObject.get("Ort").toString(), Integer.parseInt(blattObject.get("PLZ").toString()), blattObject.get("Hausnummer").toString(), blattObject.get("Strasse").toString()), new Wirtschaft(blattObject.get("Wirtschaft").toString()), new ZustehendeRechte(blattObject.get("Zustehende Rechte").toString()))));
 				}
 			}
 			this.buecher.createNewBuch(new Grundbuch(buchObject.get("name").toString(), blaetterFuerBuch));
-			System.out.println("Grundbuch erstellt!");
-			System.out.println(this.connector.getUserCollection().findOne().toString());
+			//			System.out.println("Grundbuch erstellt!");
+			//			System.out.println(this.connector.getUserCollection().findOne().toString());
 
 		}
+		System.out.println("===Grundbuecher geladen===");
 
 
 	}
-	public List<User> loadUser(){
 
+	private void loadUser(){
 
-		return null;
+		DBCursor userCursor = this.connector.getUserCollection().find();
+		while(userCursor.hasNext()){
+			DBObject userObject = userCursor.next();
+			if(userObject.get("Ablaufdatum")==null){
+				this.userList.add(new User(userObject.get("name").toString(), Boolean.parseBoolean(userObject.get("admin").toString())));
+				//				System.out.println(new User(userObject.get("name").toString(), Boolean.parseBoolean(userObject.get("admin").toString())).toString());
+			}else{
+				try {
+					this.userList.add(new TempUser(userObject.get("name").toString(), Boolean.parseBoolean(userObject.get("admin").toString()), new SimpleDateFormat().parse(userObject.get("Ablaufdatum").toString())));
+					//					System.out.println(new TempUser(userObject.get("name").toString(), Boolean.parseBoolean(userObject.get("admin").toString()), new SimpleDateFormat().parse(userObject.get("Ablaufdatum").toString())));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		System.out.println("===Load User from Database===");
 	}
 
 	//		DBCursor cursor = this.connector.getGrundbuchCollection().find();
