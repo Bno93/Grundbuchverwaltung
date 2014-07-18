@@ -44,15 +44,15 @@ import com.mongodb.MongoException;
  *
  */
 public class DataBase {
-	private String hostname;
-	private int portnumber;
-	private String databaseName;
-	private String username;
-	private char[] password;
-	private DatabaseConnector connector;
-
 	GrundbuchList buecher = new GrundbuchList();
+	private DatabaseConnector connector;
+	private String databaseName;
+	private String hostname;
+	private char[] password;
+	private int portnumber;
+
 	List<User> userList = new ArrayList<User>();
+	private String username;
 
 	public DataBase(String hostname, int portnumber, String databaseName, String username, char[] password) throws UnknownHostException, MongoException, Exception {
 		this.databaseName = databaseName;
@@ -61,6 +61,14 @@ public class DataBase {
 		this.portnumber = portnumber;
 		this.username = username;
 		this.connector = new DatabaseConnector(hostname,portnumber,databaseName, username,password);
+	}
+
+	/**
+	 *
+	 * @see database.DatabaseConnector#closeDBConnection()
+	 */
+	public void closeDBConnection() {
+		this.connector.closeDBConnection();
 	}
 
 	public GrundbuchList getBuecher() {
@@ -112,6 +120,7 @@ public class DataBase {
 
 		}
 		System.out.println("===Grundbuecher geladen===");
+		//		this.connector.closeDBConnection();
 
 
 	}
@@ -134,6 +143,19 @@ public class DataBase {
 			}
 		}
 		System.out.println("===Load User from Database===");
+	}
+
+	public void saveBuecher(){
+		System.out.println("aber hier war ich");
+		for(int i = 0; i< this.buecher.getSize();i++){
+			DBCursor buchCursor = this.connector.getGrundbuchCollection().find();
+			while(buchCursor.hasNext()){
+				System.out.println("Hier war ich gerade");
+				DBObject buch = buchCursor.next();
+				this.buecher.getGrundbuch(i).equals(new Grundbuch(buch.get("name").toString(),null));
+				//Weiter im text
+			}
+		}
 	}
 
 	//		DBCursor cursor = this.connector.getGrundbuchCollection().find();

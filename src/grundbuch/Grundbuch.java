@@ -9,9 +9,9 @@ import java.util.List;
  *
  */
 public class Grundbuch {
+	List<Grundbuchblatt> blaetter = new ArrayList<Grundbuchblatt>();
 	private String grundbuchName;
 	private int grundbuchNummer;
-	List<Grundbuchblatt> blaetter = new ArrayList<Grundbuchblatt>();
 	public Grundbuch(String grundbuchName, List<Grundbuchblatt> blaetter) {
 		this.grundbuchName = grundbuchName;
 		this.blaetter = blaetter;
@@ -40,18 +40,54 @@ public class Grundbuch {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Grundbuch other = (Grundbuch) obj;
+		if (this.grundbuchName == null) {
+			if (other.grundbuchName != null) {
+				return false;
+			}
+		} else if (!this.grundbuchName.equals(other.grundbuchName)) {
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * @return the grundbuchName
 	 */
 	public String getGrundbuchName() {
 		return this.grundbuchName;
 	}
-
 	/**
 	 * @return the grundbuchNummer
 	 */
 	public int getGrundbuchNummer() {
 		return this.grundbuchNummer;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((this.grundbuchName == null) ? 0 : this.grundbuchName.hashCode());
+		return result;
 	}
 	/**
 	 * @param grundbuchName the grundbuchName to set
@@ -59,7 +95,6 @@ public class Grundbuch {
 	public void setGrundbuchName(String grundbuchName) {
 		this.grundbuchName = grundbuchName;
 	}
-
 	/**
 	 * @param grundbuchNummer the grundbuchNummer to set
 	 */

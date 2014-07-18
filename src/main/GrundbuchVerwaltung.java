@@ -93,9 +93,15 @@ public class GrundbuchVerwaltung {
 
 			//prüfe ob zugang genehmigt mit loginCorrect()
 			if(loginCorrect){
-				//				MessageHandler.showErrorMessage(null, "Login nicht Korrekt");
+				MessageHandler.showErrorMessage(null, "Login nicht Korrekt");
 			}else{
 				database.loadData();
+
+				//vor dem speichern muss die Verbindung getrennt werden sonnst gibt es einen fehler!!!!!!!
+				database.closeDBConnection();
+				database = new DataBase(gui.getHostField(),gui.getPortField(),gui.getDatabaseNameField(), gui.getUserNameField(), gui.getPasswordField());
+
+				database.saveBuecher();
 			}
 		}while(loginCorrect);
 

@@ -30,4 +30,12 @@ public class GrundbuchList {
 			this.grundbuecher.add(buch);
 		}
 	}
+
+	public Grundbuch getGrundbuch(int index){
+		return this.grundbuecher.get(index);
+	}
+
+	public int getSize(){
+		return this.grundbuecher.size();
+	}
 }
